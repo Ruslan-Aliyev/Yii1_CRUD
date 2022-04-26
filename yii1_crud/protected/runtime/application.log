@@ -1,6 +1,0 @@
-2022/04/24 08:07:58 [error] [system.db.CDbCommand] CDbCommand::fetchAll() failed: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'yii1.tbl_migration' doesn't exist. The SQL statement executed was: SHOW FULL COLUMNS FROM `tbl_migration`.
-2022/04/24 08:08:14 [error] [system.db.CDbCommand] CDbCommand::execute() failed: SQLSTATE[42S01]: Base table or view already exists: 1050 Table 'users' already exists. The SQL statement executed was: CREATE TABLE `users` (
-	`id` int(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
-	`username` VARCHAR(60),
-	`password` VARCHAR(21)
-) ENGINE=InnoDB.

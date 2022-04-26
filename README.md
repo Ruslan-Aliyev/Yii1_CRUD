@@ -53,7 +53,7 @@ In `yii1_crud/protected/components/UserIdentity.php::authenticate()`, you will f
 
 `yii1_crud/protected/config/database.php`
 
-## Or you can accomplish the above via Migrations
+## Migrations
 
 Basic commands:
 

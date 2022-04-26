@@ -15,12 +15,11 @@ class m220424_055800_create_users_table extends CDbMigration
 
         $this->insert('users', array(
             'username' => 'demo',
-            'password' => md5('demo'),
+            'password' => 'demo'//md5('demo'),
         ));
-
         $this->insert('users', array(
             'username' => 'admin',
-            'password' => md5('admin'),
+            'password' => 'admin'//md5('admin'),
         ));
 	}
 
