@@ -67,6 +67,10 @@ Basic commands:
 
 https://www.yiiframework.com/doc/api/1.1/CActiveRecord
 
+## Relations
+
+https://www.yiiframework.com/doc/guide/1.1/en/database.arr
+
 # Gii Module
 
 Enable it in `yii1_crud/protected/config/main.php::modules::gii`.
