@@ -63,6 +63,13 @@ Basic commands:
 ./yiic migrate down 1 # rollback migration by 1. It can be any integer
 ```
 
+Run only specific migration script
+
+```
+./yiic migrate mark the_script_just_before
+./yiic migrate
+```
+
 ## Active Record for Yii1
 
 https://www.yiiframework.com/doc/api/1.1/CActiveRecord
