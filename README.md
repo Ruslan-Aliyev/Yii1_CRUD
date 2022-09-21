@@ -135,3 +135,52 @@ Put `$users = Users::model()->findAll()` into `UserController::actionIndex()`.
 Pass `$users` onto view by `$this->render('index', ['users_key' => $users]);`.
 
 You can receive it in view as `<?php $users_key ... ?>`.
+
+## GridView
+
+`appname/protected/views/posts/viewname.php`
+```php
+<?php 
+    $this->widget('zii.widgets.grid.CGridView', array(
+        'id'=>'whateverid-grid',
+        'dataProvider'=>$dataProvider,
+        'columns'=>array(
+            'id',
+            'title',
+            //...
+            array(
+                'class'=>'CButtonColumn',
+            ),
+        ),
+    )); 
+?>
+```
+https://www.yiiframework.com/doc/api/1.1/CGridView
+
+`appname/protected/controllers/PostsController.php`
+```php
+    public function actionSomething()
+    {
+        $model=new Posts();
+        $dataProvider = $model->getdata();
+
+       $this->render('viewname',array(
+            'dataProvider'=>$dataProvider
+        ));
+    }
+```
+https://www.yiiframework.com/doc/api/1.1/CActiveDataProvider
+
+`appname/protected/models/Posts.php`
+```php
+    public function getdata()
+    {
+        $criteria = new CDbCriteria;
+        // ...
+
+        return new CActiveDataProvider($this, array(
+            'criteria' => $criteria,
+        ));
+    }
+```
+https://www.yiiframework.com/doc/api/1.1/CDbCriteria
