@@ -184,3 +184,7 @@ https://www.yiiframework.com/doc/api/1.1/CActiveDataProvider
     }
 ```
 https://www.yiiframework.com/doc/api/1.1/CDbCriteria
+
+## Command, Cron, ..
+
+https://www.yiiframework.com/doc/api/1.1/CConsoleCommand
