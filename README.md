@@ -70,6 +70,79 @@ Run only specific migration script
 ./yiic migrate
 ```
 
+### Stored Procedures
+
+In plain MySQL:
+```
+DELIMITER $$ -- Changes delimiter to $$ so can use ; within the procedure
+CREATE PROCEDURE <Your-procedure-name>(<argument1><argument2>...<argumentN>)
+BEGIN
+	<Code-that-stored-procedure-executes>; -- Use the ; symbol within the procedure
+END$$
+DELIMITER ; -- Resets the delimiter
+```
+For example:
+```
+DELIMITER $$ -- Changes delimiter to $$ so can use ; within the procedure
+CREATE PROCEDURE select_employees(IN thisDay datetime)
+BEGIN
+	select * 
+	from employees 
+    where probationEnds > thisDay
+	limit 1000; -- Use the ; symbol within the procedure
+END$$ 
+DELIMITER ; -- Resets the delimiter
+```
+- https://www.mysqltutorial.org/getting-started-with-mysql-stored-procedures.aspx
+- https://www.sqlshack.com/learn-mysql-the-basics-of-mysql-stored-procedures
+
+In Yii v1 migration script
+```php
+class m220216_030106_create_stored_procedure_employees extends CDbMigration
+{
+    private $procName = 'sp_GetEmployees';
+
+    public function safeUp()
+    {
+        $dropSql = "DROP PROCEDURE IF EXISTS $this->procName;";
+        $this->execute($dropSql);
+
+        $createSql = "
+        CREATE PROCEDURE $this->procName (IN thisDay datetime)
+        BEGIN
+            select * 
+            from employees 
+            where probationEnds > thisDay
+            limit 1000; -- Use the ; symbol within the procedure
+        END;";
+        
+        $this->execute($createSql);
+    }
+
+    public function safeDown()
+    {
+        $this->execute("DROP PROCEDURE IF EXISTS $this->procName;");
+    }
+}
+```
+Calling it from eg model:
+```php
+public function retrieveEmployees($someDate)
+{
+    $someDate = $someDate . " 00:00:00";
+
+    $sql = "CALL sp_GetEmployees(:someDate);";
+    $params = ['params' =>
+        [
+            ':someDate' => $someDate
+        ]
+    ];
+
+    return new CSqlDataProvider($sql, $params);
+}
+```
+- https://www.yiiframework.com/doc/api/1.1/CSqlDataProvider
+
 ## Active Record for Yii1
 
 https://www.yiiframework.com/doc/api/1.1/CActiveRecord
